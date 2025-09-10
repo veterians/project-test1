@@ -441,21 +441,26 @@ elif menu == "🏡 새 가족 매칭":
         col1, col2 = st.columns(2)
         
         with col1:
-            # 월별 매칭 성공률
+            # 월별 매칭 성공률 - 간단한 bar chart
             months = ['1월', '2월', '3월']
             success_rate = [85, 89, 92]
             
-            fig = px.line(x=months, y=success_rate, title="월별 매칭 성공률")
-            fig.update_traces(line=dict(color='#FF6B6B', width=3))
-            st.plotly_chart(fig, use_container_width=True)
+            chart_data = pd.DataFrame({
+                '월': months,
+                '매칭 성공률(%)': success_rate
+            })
+            
+            st.subheader("월별 매칭 성공률")
+            st.bar_chart(chart_data.set_index('월'))
         
         with col2:
-            # 동물 종류별 분포
-            pet_types = ['강아지', '고양이', '기타']
-            counts = [45, 32, 8]
-            
-            fig = px.pie(values=counts, names=pet_types, title="등록 동물 분포")
-            st.plotly_chart(fig, use_container_width=True)
+            # 동물 종류별 분포 - 간단한 표
+            st.subheader("등록 동물 분포")
+            pet_data = pd.DataFrame({
+                '동물 종류': ['강아지', '고양이', '기타'],
+                '등록 수': [45, 32, 8]
+            })
+            st.dataframe(pet_data, use_container_width=True)
         
         # 최근 성공 매칭
         st.subheader("최근 성공 매칭")
