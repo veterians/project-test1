@@ -2,10 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from datetime import datetime, date
-import plotly.express as px
-import plotly.graph_objects as go
-from PIL import Image
-import io
 
 # 페이지 설정
 st.set_page_config(
@@ -152,8 +148,7 @@ elif menu == "📖 디지털 자서전 & 아바타":
         with col2:
             uploaded_file = st.file_uploader("대표 사진 업로드", type=['png', 'jpg', 'jpeg'])
             if uploaded_file:
-                image = Image.open(uploaded_file)
-                st.image(image, width=200)
+                st.image(uploaded_file, width=200)
         
         st.markdown("### 추억의 순간들")
         memories = st.text_area("특별한 추억을 적어주세요", height=150, 
@@ -268,8 +263,7 @@ elif menu == "📱 모바일 장례식 웹페이지":
                 cols = st.columns(3)
                 for idx, photo in enumerate(uploaded_photos[:6]):
                     with cols[idx % 3]:
-                        image = Image.open(photo)
-                        st.image(image, width=100)
+                        st.image(photo, width=100)
     
     with tab2:
         st.subheader("웹페이지 미리보기")
